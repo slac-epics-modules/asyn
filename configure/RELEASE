@@ -1,43 +1,17 @@
-# RELEASE
-# Defines location of external products
-include $(TOP)/RELEASE_SITE
+#RELEASE Location of external products
 
-# ===============================================================
-# Define the location and version of EPICS base
-# ===============================================================
-BASE_MODULE_VERSION=R3.14.12-0.4.0
-EPICS_BASE=$(EPICS_SITE_TOP)/base/$(BASE_MODULE_VERSION)
+-include $(TOP)/../configure/SUPPORT.$(EPICS_HOST_ARCH)
+-include $(TOP)/configure/RELEASE.local
+-include $(TOP)/RELEASE.local
+
+#  IPAC is only necessary if support for Greensprings IP488 is required
+#  IPAC release V2-7 or later is required.
+# IPAC=$(SUPPORT)/ipac-2-13
+
+# SEQ is required for testIPServer
+# SNCSEQ=$(SUPPORT)/seq-2-2-3
+
+#  EPICS_BASE 3.14.6 or later is required
+# EPICS_BASE=/corvette/usr/local/epics/base-3.14.12.5
+
 -include $(TOP)/../configure/EPICS_BASE.$(EPICS_HOST_ARCH)
-
-#
-# PCDS Note: Compiling with LINUX_GPIB=YES requires that the
-# linux-gpib package be installed.  The most recent version
-# compatible with our 2.6.18 kernel is linux-gpib-3.2.09
-# This version is currently installed on:
-#	psusr117.dev.pcdsn
-#
-#LINUX_GPIB=NO
-
-# ===============================================================
-# Define the version(s) of any other needed modules 
-# ===============================================================
-# IPAC is only needed for Greensprings IP-488 driver 
-#IPAC_MODULE_VERSION=R3.0.0-1.0.4
-# SNCSEQ is only needed to build the asyn test app named testIPServerApp
-#SNCSEQ_MODULE_VERSION=R2.1.10-0.1.0
-
-# ============================================================
-# External Support module path definitions
-#
-# If any of these macros expand to a path which
-# contains an "include" directory, that directory will be
-# included in the compiler include path.
-#
-# If any of these macros expand to a path which
-# contains a "lib/<arch>" directory, that directory will be
-# included in the compiler link path for that architecture.
-#
-# If your build fails, look for these paths in your build output
-# ============================================================
-#IPAC=$(EPICS_MODULES)/ipac/$(IPAC_MODULE_VERSION)
-#SEQ=$(EPICS_MODULES)/seq/$(SEQ_MODULE_VERSION)
